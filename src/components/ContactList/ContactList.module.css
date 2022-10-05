@@ -1,0 +1,44 @@
+.contactList {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+}
+
+.contactListItem {
+    width: 300px;
+    text-align: center;
+    margin-bottom: 15px;
+    background: linear-gradient(#302f32, #89b423e9, #302f32);
+    padding: 15px;
+    border-radius: 6px;
+    
+}
+
+.contactListItem:hover {
+    transform: scale(1.01);
+}
+.contactListEl {
+    margin-bottom: 10px;
+}
+.contactListSpan {
+    font-weight: bolder;
+    margin-right: 10px;
+}
+
+
+.contactListDelBtn {
+    font-size: 15px;
+    width: 160px;
+    height: 30px;
+    border-radius: 6px;
+    background: linear-gradient(#302f32, #91e6f7e9, #302f32);
+    text-transform: uppercase;
+ 
+}
+
+.contactListDelBtn:hover {
+background: linear-gradient(#302f32, #b319d9e9, #302f32);
+    transform: scale(1.2);
+}
