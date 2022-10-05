@@ -1,78 +1,90 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import css from '../ContactForm/ContactForm.module.css'
 
-class ContactForm extends Component {
-    state = {
-      name: '',
-      number: ''
+export default function ContactForm({ onSubmit }) {
+  const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
+
+
+  const hendleInputChange = event => {
+    switch (event.currentTarget.name) {
+      case 'name':
+        setName(event.currentTarget.value);
+        break;
+      case 'number':
+        setNumber(event.currentTarget.value);
+        break;
+      default:
+        return;
     }
-    hendleInputChange = event => {
-    const { name, value } = event.currentTarget
-    this.setState({
-        [name]: value,
-    });
-  };
-  
-    handleSubmit = event => {
+  }
+    const handleSubmit = event => {
       event.preventDefault();
-      this.props.onSubmit(this.state)
-        this.reset()
+      onSubmit({ name: name, number: number })
+        reset()
     }
 
-    reset = () => {
-        this.setState({
-        name: '',
-        number: ''
-        });
+    const reset = () => {
+      setName('')
+      setNumber ('')
+          
   }
   
-    inputNameId = nanoid();
-    inputTelId = nanoid();
+    const inputNameId = nanoid();
+    const inputTelId = nanoid();
   
 
-    render() {
         return (
-     <form className={css.conactForm} onSubmit={this.handleSubmit}>
-        <label htmlFor={this.inputNameId} className={css.conactFormLabel}>
+     <form className={css.conactForm} onSubmit={handleSubmit}>
+        <label htmlFor={inputNameId} className={css.conactFormLabel}>
             Name
           <input
             className={css.conactFormItem}
-            id={this.inputNameId}
+            id={inputNameId}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={this.state.name}
-            onChange={this.hendleInputChange}>
+            value={name}
+            onChange={hendleInputChange}>
           </input>
         </label>
-        <label htmlFor={this.inputTelId} className={css.conactFormLabel}>
+        <label htmlFor={inputTelId} className={css.conactFormLabel}>
             Number
           <input
             className={css.conactFormItem}
-            id={this.inputTelId}
+            id={inputTelId}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={this.state.number}
-            onChange={this.hendleInputChange}>
+            value={number}
+            onChange={hendleInputChange}>
           </input>
         </label>
         <button className={css.contactFormBtn } type="submit">Add contact</button>
       </form>
         );
     }
-}
 
-
-export default ContactForm;
 
 ContactForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
 
 }
+
+//const hendleNameChange = event => {
+    
+ // setName(event.currentTarget.value);
+  
+//};
+  
+ // const hendleNumberChange = event => {
+    
+ // setNumber(event.currentTarget.value);
+  
+ // };
